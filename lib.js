@@ -59,6 +59,17 @@ exports.hasBlockLevelFunctions = function() {
 };
 
 
+exports.hasDefaultParams = function() {
+    var result;
+    try {
+        result = eval("(function __dfp(a, _dfpa = 1) { return a + _dfpa; })(2)");
+        return typeof _dfpa === "undefined" && result === 3;
+    } catch(e) {
+        return false;
+    }
+};
+
+
 exports.hasMapStructure = function() {
     return evalTest("var m = new Map(); m.set(1, true);");
 };
