@@ -70,6 +70,16 @@ exports.hasDefaultParams = function() {
 };
 
 
+exports.hasRestParams = function() {
+    return evalTest("(function _rp(...b) { return b.length; })()");
+};
+
+
+exports.hasSpreadOp = function() {
+    return evalTest("(function() { var a = [1, 2]; return [5, ...a, 6]; })()");
+};
+
+
 exports.hasMapStructure = function() {
     return evalTest("var m = new Map(); m.set(1, true);");
 };
