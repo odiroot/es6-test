@@ -85,6 +85,11 @@ exports.hasTemplateStrings = function() {
 };
 
 
+exports.hasDestructuringAssignment = function() {
+    return evalTest("var [a, b] = [1, 2]; var {c, d} = {c: 3, d: 4};");
+};
+
+
 exports.hasMapStructure = function() {
     return evalTest("var m = new Map(); m.set(1, true);");
 };
