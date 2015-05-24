@@ -38,11 +38,6 @@ exports.hasObjectShortcutSyntax = function() {
 };
 
 
-exports.hasStringTemplates = function() {
-    return evalTest("var x = 1, s = `foo ${x}`;");
-};
-
-
 exports.hasForOfLoops = function() {
     return evalTest("var a = [1, 2, 3], el; for(el of a) { el += 1; }");
 };
@@ -59,7 +54,7 @@ exports.hasBlockLevelFunctions = function() {
 };
 
 
-exports.hasDefaultParams = function() {
+exports.hasDefaultParameters = function() {
     var result;
     try {
         result = eval("(function __dfp(a, _dfpa = 1) { return a + _dfpa; })(2)");
@@ -70,12 +65,12 @@ exports.hasDefaultParams = function() {
 };
 
 
-exports.hasRestParams = function() {
+exports.hasRestParameters = function() {
     return evalTest("(function _rp(...b) { return b.length; })()");
 };
 
 
-exports.hasSpreadOp = function() {
+exports.hasSpreadOperator = function() {
     return evalTest("(function() { var a = [1, 2]; return [5, ...a, 6]; })()");
 };
 
@@ -103,3 +98,4 @@ exports.hasSetStructure = function() {
 exports.hasPromises = function() {
     return typeof Promise === "function" && typeof Promise.resolve === "function";
 };
+
