@@ -100,6 +100,11 @@ exports.hasSetStructure = function() {
 };
 
 
+exports.hasTypedArrays = function() {
+    return evalTest("var _ta = new Int32Array(2);");
+};
+
+
 exports.hasPromises = function() {
     return typeof Promise === "function" && typeof Promise.resolve === "function";
 };
