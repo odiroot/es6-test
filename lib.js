@@ -80,6 +80,11 @@ exports.hasSpreadOp = function() {
 };
 
 
+exports.hasTemplateStrings = function() {
+    return evalTest("var x = 1, s = `X value is ${x}.`;");
+};
+
+
 exports.hasMapStructure = function() {
     return evalTest("var m = new Map(); m.set(1, true);");
 };
