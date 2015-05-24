@@ -119,3 +119,18 @@ exports.hasPromises = function() {
     return typeof Promise === "function" && typeof Promise.resolve === "function";
 };
 
+
+exports.hasProxies = function() {
+    // TODO
+};
+
+
+exports.hasSymbols = function() {
+    // TODO
+};
+
+
+// TODO: Built-in extensions section.
+
+
+
