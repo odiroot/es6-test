@@ -122,12 +122,12 @@ exports.hasPromises = function() {
 
 
 exports.hasProxies = function() {
-    // TODO
+    return evalTest("var _ph = { get: function() {} }, _p = new Proxy({}, _ph);");
 };
 
 
 exports.hasSymbols = function() {
-    // TODO
+    return evalTest("var _s = Symbol('sym');");
 };
 
 
