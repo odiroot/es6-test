@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/github-dark.css">
     <script src="javascripts/scale.fix.js"></script>
+    <script src="javascripts/es6-test.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
     <!--[if lt IE 9]>
@@ -27,7 +28,7 @@
         </ul>
       </header>
       <section>
-          <h3>Browser score <span class="es6-score"></span></h3>
+          <h3>Browser score: <span class="es6-score">n/a</span></h3>
 
           <p>
               <h4>Passed tests:</h4>
@@ -47,5 +48,32 @@
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
     
     <!-- SCRIPTS HERE -->
+    <script>
+        var key,
+            value,
+            pContainer,
+            fContainer,
+            row,
+            result = Test();
+
+        document.querySelector(".es6-score").innerHTML = (
+                result.passed + "/" + result.all);
+
+        pContainer = document.querySelector(".es6-passed");
+        fContainer = document.querySelector(".es6-failed");
+
+        for(key in result.state) {
+            value = result.state[key];
+
+            row = document.createElement("li");
+            row.innerHTML = key;
+
+            if(value) {
+                pContainer.appendChild(row);
+            } else {
+                fContainer.appendChild(row);
+            }
+        }
+    </script>
   </body>
 </html>
