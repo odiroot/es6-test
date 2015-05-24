@@ -29,7 +29,7 @@ exports.hasConstKeyword = function() {
 
 
 exports.hasLetKeyword = function() {
-    return evalTest("let c = 1;");
+    return evalTest("let _lk = 1;");
 };
 
 
