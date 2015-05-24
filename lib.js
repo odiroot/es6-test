@@ -126,7 +126,7 @@ exports.hasProxies = function() {
 
 
 exports.hasSymbols = function() {
-    // TODO
+    return evalTest("var _s = Symbol('sym');");
 };
 
 
