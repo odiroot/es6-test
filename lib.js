@@ -85,6 +85,11 @@ exports.hasDestructuringAssignment = function() {
 };
 
 
+exports.hasGenerators = function() {
+    return evalTest("function *_g() { yield 1; }");
+};
+
+
 exports.hasMapStructure = function() {
     return evalTest("var m = new Map(); m.set(1, true);");
 };
