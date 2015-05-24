@@ -95,6 +95,16 @@ exports.hasMapStructure = function() {
 };
 
 
+exports.hasWeakMapStructure = function() {
+    return evalTest("var a = {}, _wm = new WeakMap(); _wm.set(a, true);");
+};
+
+
+exports.hasWeakSetStructure = function() {
+    return evalTest("var a = {}, _ws = new WeakSet(); _ws.add(a);");    
+};
+
+
 exports.hasSetStructure = function() {
     return evalTest("var s = new Set(); s.add(1);");
 };
