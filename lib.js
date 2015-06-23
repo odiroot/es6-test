@@ -154,3 +154,25 @@ exports.hasOctalLiterals = function() {
 exports.hasBinaryLiterals = function() {
     return evalResult("0O11") === 9;
 };
+
+
+exports.hasReflection = function() {
+    return typeof Reflect === "object" && typeof Reflect.get === "function";
+};
+
+
+exports.hasNewStringMethods = function() {
+    var proto = String.prototype;
+
+    return (typeof proto.repeat === "function" && 
+            typeof proto.startsWith === "function" &&
+            typeof proto.endsWith === "function" &&
+            typeof proto.includes === "function");
+};
+
+
+exports.hasNewNumberMethods = function() {
+    return (typeof Number.isFinite === "function" && 
+            typeof Number.isInteger === "function" &&
+            typeof Number.isNaN === "function");
+};
