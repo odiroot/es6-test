@@ -12,6 +12,13 @@ function evalTest(code) {
     }
 }
 
+function evalResult(code) {
+    try {
+        return eval(code);
+    } catch(e) {
+        return false;
+    }
+}
 
 exports.hasArrowFunctions = function() {
     return evalTest("var f = (a) => { return a; };");
@@ -35,6 +42,16 @@ exports.hasLetKeyword = function() {
 
 exports.hasObjectShortcutSyntax = function() {
     return evalTest("var x = 1, o = { x };");
+};
+
+
+exports.hasObjectComputedProps = function() {
+    return evalTest("var o = { [1 + 2]: 'three' };");
+};
+
+
+exports.hasShorthandMethods = function() {
+    return evalTest("var o = { f() { return true; } };");
 };
 
 
@@ -130,7 +147,10 @@ exports.hasSymbols = function() {
 };
 
 
-// TODO: Built-in extensions section.
+exports.hasOctalLiterals = function() {
+    return evalResult("0o10") === 8;
+};
 
-
-
+exports.hasBinaryLiterals = function() {
+    return evalResult("0O11") === 9;
+};
