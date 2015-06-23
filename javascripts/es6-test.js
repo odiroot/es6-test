@@ -1,4 +1,4 @@
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.Test = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /* global exports */
 /* jshint globalstrict:true */
 "use strict";
@@ -13,6 +13,13 @@ function evalTest(code) {
     }
 }
 
+function evalResult(code) {
+    try {
+        return eval(code);
+    } catch(e) {
+        return false;
+    }
+}
 
 exports.hasArrowFunctions = function() {
     return evalTest("var f = (a) => { return a; };");
@@ -36,6 +43,16 @@ exports.hasLetKeyword = function() {
 
 exports.hasObjectShortcutSyntax = function() {
     return evalTest("var x = 1, o = { x };");
+};
+
+
+exports.hasObjectComputedProps = function() {
+    return evalTest("var o = { [1 + 2]: 'three' };");
+};
+
+
+exports.hasShorthandMethods = function() {
+    return evalTest("var o = { f() { return true; } };");
 };
 
 
@@ -131,10 +148,35 @@ exports.hasSymbols = function() {
 };
 
 
-// TODO: Built-in extensions section.
+exports.hasOctalLiterals = function() {
+    return evalResult("0o10") === 8;
+};
+
+exports.hasBinaryLiterals = function() {
+    return evalResult("0O11") === 9;
+};
 
 
+exports.hasReflection = function() {
+    return typeof Reflect === "object" && typeof Reflect.get === "function";
+};
 
+
+exports.hasNewStringMethods = function() {
+    var proto = String.prototype;
+
+    return (typeof proto.repeat === "function" && 
+            typeof proto.startsWith === "function" &&
+            typeof proto.endsWith === "function" &&
+            typeof proto.includes === "function");
+};
+
+
+exports.hasNewNumberMethods = function() {
+    return (typeof Number.isFinite === "function" && 
+            typeof Number.isInteger === "function" &&
+            typeof Number.isNaN === "function");
+};
 
 },{}],2:[function(require,module,exports){
 var tests = require("./lib");
@@ -167,5 +209,33 @@ module.exports = function runTests() {
 	};
 };
 
-},{"./lib":1}]},{},[2])(2)
-});
+},{"./lib":1}],3:[function(require,module,exports){
+var runTests = require("./main");
+
+
+var result = runTests(),
+	$support = document.getElementById("support");
+
+$support.value = result.passed + "/" + result.all;
+
+
+var key,
+	val,
+	row,
+	$supported = document.getElementById("supported"),
+	$unsupported = document.getElementById("unsupported");
+
+for(key in result.state) {
+	val = result.state[key];
+
+	row = document.createElement("li");
+	row.textContent = key;
+
+	if(val) {
+		supported.appendChild(row);
+	} else {
+		unsupported.appendChild(row);
+	}
+}
+
+},{"./main":2}]},{},[3]);
